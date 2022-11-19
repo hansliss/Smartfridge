@@ -4,7 +4,7 @@
         <name>Notify_owner2</name>
         <label>Notify owner</label>
         <locationX>50</locationX>
-        <locationY>1730</locationY>
+        <locationY>1946</locationY>
         <actionName>SmartfridgeActions</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -90,7 +90,7 @@
         <name>Clear_checkbox</name>
         <label>Clear checkbox</label>
         <locationX>490</locationX>
-        <locationY>1370</locationY>
+        <locationY>1586</locationY>
         <assignmentItems>
             <assignToReference>Find_Smartfridge.Case_created__c</assignToReference>
             <operator>Assign</operator>
@@ -122,7 +122,7 @@
         <name>Set_checkbox</name>
         <label>Set checkbox</label>
         <locationX>50</locationX>
-        <locationY>1850</locationY>
+        <locationY>2066</locationY>
         <assignmentItems>
             <assignToReference>Find_Smartfridge.Case_created__c</assignToReference>
             <operator>Assign</operator>
@@ -154,7 +154,7 @@
         <name>Already_notified</name>
         <label>Already notified</label>
         <locationX>182</locationX>
-        <locationY>1370</locationY>
+        <locationY>1586</locationY>
         <defaultConnector>
             <targetReference>Update_Smartfridge_again</targetReference>
         </defaultConnector>
@@ -176,10 +176,35 @@
         </rules>
     </decisions>
     <decisions>
+        <name>Check_if_we_should_create_an_Event</name>
+        <label>Check if we should create an Event</label>
+        <locationX>336</locationX>
+        <locationY>1130</locationY>
+        <defaultConnector>
+            <targetReference>Create_case_if_door_left_open</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not checked</defaultConnectorLabel>
+        <rules>
+            <name>Create_Events_is_checked</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Find_Smartfridge.Create_Event_Records__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_a</targetReference>
+            </connector>
+            <label>Create Events is checked</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Create_case_if_door_left_open</name>
         <label>Create case if door left open</label>
         <locationX>336</locationX>
-        <locationY>1250</locationY>
+        <locationY>1466</locationY>
         <defaultConnector>
             <targetReference>Clear_checkbox</targetReference>
         </defaultConnector>
@@ -257,8 +282,8 @@
     <recordCreates>
         <name>Create_a</name>
         <label>Create a SmartfridgeEvent</label>
-        <locationX>336</locationX>
-        <locationY>1130</locationY>
+        <locationX>204</locationX>
+        <locationY>1250</locationY>
         <connector>
             <targetReference>Create_case_if_door_left_open</targetReference>
         </connector>
@@ -293,7 +318,7 @@
         <name>Create_a_Case_regarding_the_door</name>
         <label>Create a Case regarding the door</label>
         <locationX>50</locationX>
-        <locationY>1490</locationY>
+        <locationY>1706</locationY>
         <assignRecordIdToReference>TheCase.Id</assignRecordIdToReference>
         <connector>
             <targetReference>Reload_Case</targetReference>
@@ -373,7 +398,7 @@
         <name>Reload_Case</name>
         <label>Reload Case</label>
         <locationX>50</locationX>
-        <locationY>1610</locationY>
+        <locationY>1826</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Notify_owner2</targetReference>
@@ -396,7 +421,7 @@
         <locationX>336</locationX>
         <locationY>1010</locationY>
         <connector>
-            <targetReference>Create_a</targetReference>
+            <targetReference>Check_if_we_should_create_an_Event</targetReference>
         </connector>
         <inputReference>Find_Smartfridge</inputReference>
     </recordUpdates>
@@ -404,7 +429,7 @@
         <name>Update_Smartfridge_again</name>
         <label>Update Smartfridge again</label>
         <locationX>336</locationX>
-        <locationY>2162</locationY>
+        <locationY>2378</locationY>
         <inputReference>Find_Smartfridge</inputReference>
     </recordUpdates>
     <start>
