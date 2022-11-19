@@ -70,7 +70,7 @@ class SmartFridge {
             doSend = true;
             lastTemperature = reading.temperature;
         }
-        if (math.abs(reading.humidity - lastHumidity) > 1) {
+        if (math.abs(reading.humidity - lastHumidity) > 10) {
             doSend = true;
             lastHumidity = reading.humidity;
         }
