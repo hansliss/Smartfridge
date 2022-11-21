@@ -1,0 +1,11 @@
+{
+  "orgName": "Itchy",
+  "edition": "Enterprise",
+  "features": ["ServiceCloud"],
+  "country" : "US",
+  "settings": {
+      "caseSettings": {
+          "systemUserEmail": "hans@liss.nu"
+      }
+  }
+}
